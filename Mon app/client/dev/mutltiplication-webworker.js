@@ -8,6 +8,7 @@ self.addEventListener("message",(e)=>{
     let b=o.b;
     // ca prend du temps
     let r=0;
+    
     for(let i=0;i<a;i++){
         if(i % 100000000){
             self.postMessage({progress:i/a,result:undefined});

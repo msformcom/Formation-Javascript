@@ -1,7 +1,6 @@
 import { Quatre4 ,Voiture} from "./models/index.js";
 import * as models from "./models/index.js";
-
-var v=new Quatre4();
+import "/node_modules/jquery/dist/jquery.js"
 
 
 
