@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallélisme</title>
+</head>
+<body>
+    <h1>Parallélisme</h1>
+    <button>Click</button>
+    <script>
+
+        function multiplicationAsync(a,b){
+            return new Promise((resolve,reject)=>{
+                try {
+                    // Création du worker
+                    let ww=new Worker("./mutltiplication-webworker.js");
+
+                    ww.postMessage({a,b});
+
+                    ww.addEventListener("message",e=>{
+                        let o=e.data;
+                        if(o.progress==1){
+                            console.log("Resultat : "+o.result);
+                            resolve(o.result);
+                          
+                        }
+                        else{
+                            console.log("Progression : "+o.progress);
+                        }
+                    })
+
+                } catch (error) {
+                    reject(new Error("Problème"))
+                }
+            })
+        }
+
+        (async function(){
+            // await ne peut être utilisé que dans une fonction marquée comme async
+            let p1= multiplicationAsync(25,4);
+            let p2= multiplicationAsync(24,9);
+            let r=await  Promise.all([p1,p2]);
+
+            let r3=await multiplicationAsync(r[0],r[1]);
+            // 25*4 *24*9
+            console.log(r3);           
+        })();
+
+
+
+    </script>
+
+
+
+</body>
+</html>

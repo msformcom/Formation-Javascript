@@ -1,6 +1,9 @@
+// npm init
 // npm i express
 
 // Chargement de la function express
+// Chargement de module
+
 const express=require("express");
 
 // Créer un serveur web
@@ -17,7 +20,7 @@ app.use(
 }
 )
 // sert les fichiers statiques situés dans le dossier dist
-app.use(express.static("../client/dist"));
+app.use(express.static("../client/dev"));
 
 
 app.listen(4200,()=>{
